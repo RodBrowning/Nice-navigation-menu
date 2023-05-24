@@ -4,7 +4,8 @@ navContainer.childNodes.forEach((item) => {
     const itemIndex = Array.from(navContainer.children).indexOf(
       event.currentTarget
     )
-    translateSpaceship(itemIndex)
+    const smoothTrasition = true
+    translateSpaceship(itemIndex, smoothTrasition)
     activeItemStyle(navContainer, event.currentTarget)
   })
 })
@@ -26,7 +27,7 @@ let clickDisabled = false
 // Todo -> Usamos para saber quantos itens de distancia deveremos transitar
 let lastIndexClicked = 0
 
-function translateSpaceship(itemIndex) {
+function translateSpaceship(itemIndex, smoothTrasition) {
   if (clickDisabled) return
   clickDisabled = true
 
@@ -58,7 +59,7 @@ function translateSpaceship(itemIndex) {
   // Todo -- um item para outro e multiplicamos pelo numero de itens teremos de transitar
   const leftTranslateTotalDuration = Math.abs(
     defaultLeftTranslateDuration *
-      Math.abs(clickedElementIndex - lastIndexClicked)
+      (smoothTrasition ? Math.abs(clickedElementIndex - lastIndexClicked) : 1)
   )
 
   // Todo -> Tempo que leva para a animação que acende a luz da nave se inicia
@@ -88,7 +89,7 @@ function translateSpaceship(itemIndex) {
 
   //Todo -> Tempo total da transição
   const time =
-    Math.abs(clickedElementIndex - lastIndexClicked) *
+    (smoothTrasition ? Math.abs(clickedElementIndex - lastIndexClicked) : 1) *
     defaultLeftTranslateDuration
 
   //Todo -> Remove classe após o fim da transição e reactiva a interação
