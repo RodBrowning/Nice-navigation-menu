@@ -24,8 +24,31 @@
         <div class="item"><span>Skills</span></div>
         <div class="item"><span>Portfolio</span></div>
         <div class="item"><span>Resumo</span></div>
+        <div class="item"><span>Contato</span></div>
       </nav>
     </div>
   </body>
+
+  <script defer>
+    const root = document.querySelector(":root")
+    const nav = document.querySelector(".nav-container")
+    const numberOfItems = nav.childElementCount
+
+    // Todo -> Atribui os valores que controlam a animação antes que os elementos apareçam em tela.
+    setCSSPropertiesDefaltValues([
+      ["--default-translate-duration", "250ms"],
+      ["--animation-duration", "200ms"],
+      ["--numOfItems", numberOfItems],
+    ])
+
+    function setCSSPropertiesDefaltValues(cssVariablesArray) {
+      const root = document.querySelector(":root")
+      cssVariablesArray.forEach((variable) => {
+        const variableName = variable[0]
+        const variableValue = variable[1]
+        root.style.setProperty(variableName, variableValue)
+      })
+    }
+  </script>
   <script src="index.js" defer></script>
 </html>

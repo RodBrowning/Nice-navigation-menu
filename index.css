@@ -1,9 +1,10 @@
 :root {
-  --default-translate-duration: 400ms;
-  --translate-duration: 500ms;
+  --default-translate-duration: 0ms;
+  --translate-duration: 0ms;
   --animation-duration: 0ms;
   --animation-delay: var(--animation-duration);
   --left-translate: 0%;
+  --numOfItems: 0;
 }
 
 html {
@@ -34,7 +35,7 @@ body {
 
 .menu-wrapper .spaceship-container .spaceship-box {
   height: 100%;
-  width: calc(100% / 5);
+  width: calc(100% / var(--numOfItems));
   background: url("./assets/navcat.png");
   background-size: contain;
   background-repeat: no-repeat;

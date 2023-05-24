@@ -20,12 +20,6 @@ function activeItemStyle(navContainer, target) {
   target.classList.add("item-active")
 }
 
-// Todo -> Atribui os valores que controlam a animação.
-setCSSPropertiesDefaltValues([
-  ["--default-translate-duration", "250ms"],
-  ["--animation-duration", "200ms"],
-])
-
 //! Desabilita a funcção enquanto o timeout estiver ativo para não interromper a animação.
 let clickDisabled = false
 // Todo -> Usamos para saber quantos itens de distancia deveremos transitar.
@@ -109,13 +103,4 @@ function translateSpaceship(itemIndex, useSmoothTrasition = true) {
 
 function getCSSPropertyStringValue(rootVariables, variable, unit) {
   return parseInt(rootVariables.getPropertyValue(variable).replace(unit, ""))
-}
-
-function setCSSPropertiesDefaltValues(cssVariablesArray) {
-  const root = document.querySelector(":root")
-  cssVariablesArray.forEach((variable) => {
-    const variableName = variable[0]
-    const variableValue = variable[1]
-    root.style.setProperty(variableName, variableValue)
-  })
 }
