@@ -23,7 +23,7 @@ function activeItemStyle(navContainer, target) {
 // Todo -> Atribui os valores que controlam a animação.
 setCSSPropertiesDefaltValues([
   ["--default-translate-duration", "250ms"],
-  ["--animation-duration", "125ms"],
+  ["--animation-duration", "200ms"],
 ])
 
 //! Desabilita a funcção enquanto o timeout estiver ativo para não interromper a animação.
