@@ -27,6 +27,8 @@ body {
   width: 100%;
   overflow: hidden;
   border-radius: 0px 0px 33px 33px;
+  -webkit-tap-highlight-color: transparent; /* Para dispositivos iOS */
+  user-select: none;
 }
 .menu-wrapper .spaceship-container {
   height: 100px;
