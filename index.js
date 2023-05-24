@@ -20,18 +20,18 @@ function activeItemStyle(navContainer, target) {
   target.classList.add("item-active")
 }
 
-// Todo -> Atribui os valores que controlam a animação
+// Todo -> Atribui os valores que controlam a animação.
 setCSSPropertiesDefaltValues([
   ["--default-translate-duration", "250ms"],
   ["--animation-duration", "125ms"],
 ])
 
-//! Desabilita a funcção enquanto o timeout estiver ativo para não interromper a animação
+//! Desabilita a funcção enquanto o timeout estiver ativo para não interromper a animação.
 let clickDisabled = false
-// Todo -> Usamos para saber quantos itens de distancia deveremos transitar
+// Todo -> Usamos para saber quantos itens de distancia deveremos transitar.
 let lastIndexClicked = 0
 
-function translateSpaceship(itemIndex, smoothTrasition = true) {
+function translateSpaceship(itemIndex, useSmoothTrasition = true) {
   if (clickDisabled) return
   clickDisabled = true
 
@@ -59,20 +59,23 @@ function translateSpaceship(itemIndex, smoothTrasition = true) {
   //* Fim get CSS variable values
 
   //* Define CSS variable values
-  // Todo -> Para manter uma velocidade constante pegamos o tempo que leva para transitar de
-  // Todo -- um item para outro e multiplicamos pelo numero de itens teremos de transitar
+  // Todo -> Para manter uma velocidade constante pegamos o tempo que se leva para transitar
+  // Todo -- um item e multiplicamos pelo numero de itens teremos de transitar, obtento o tempo total da animação.
+  // Todo -> Esta escala não será ativada se a opção useSmoothTrasition for false. useSmoothTrasition é true por padrão.
   const leftTranslateTotalDuration = Math.abs(
     defaultLeftTranslateDuration *
-      (smoothTrasition ? Math.abs(clickedElementIndex - lastIndexClicked) : 1)
+      (useSmoothTrasition
+        ? Math.abs(clickedElementIndex - lastIndexClicked)
+        : 1)
   )
 
-  // Todo -> Tempo que leva para a animação que acende a luz da nave se inicia
+  // Todo -> Tempo que leva para a animação que acende a luz da nave se inicia.
   const animationDelay = `${Math.abs(
     animationDuration - leftTranslateTotalDuration
   ).toString()}ms`
 
   // Todo -> Descobrimos a porcentagem que cada item ocupa
-  // Todo -- e muntiplicamos por quandos itens devemos transitar para ter a posição final do item
+  // Todo -- e muntiplicamos por quandos itens devemos transitar para ter a posição final do item.
   const translatePercentage = (100 / numberOfItems) * clickedElementIndex
   root.style.setProperty("--left-translate", `${translatePercentage}%`)
   //* Fim define CSS variable values
@@ -82,18 +85,18 @@ function translateSpaceship(itemIndex, smoothTrasition = true) {
     "--translate-duration",
     `${leftTranslateTotalDuration}ms`
   )
-  // root.style.setProperty("--animation-duration", `${animationDuration}ms`)
   root.style.setProperty("--animation-delay", animationDelay)
   //* Fim set CSS variable values
 
   //* Handle light animation class
   if (spaceshipBox.classList.contains("animate"))
     spaceshipBox.classList.remove("animate")
+
   spaceshipBox.classList.add("animate")
 
   const time = leftTranslateTotalDuration
 
-  //Todo -> Remove classe após o fim da transição e reactiva a interação
+  //Todo -> Remove classe após o fim da transição e reativa a interação.
   setTimeout(() => {
     spaceshipBox.classList.remove("animate")
     clickDisabled = false
@@ -107,15 +110,12 @@ function translateSpaceship(itemIndex, smoothTrasition = true) {
 function getCSSPropertyStringValue(rootVariables, variable, unit) {
   return parseInt(rootVariables.getPropertyValue(variable).replace(unit, ""))
 }
-function getCSSPropertyDeciamalNumberValue(rootVariables, variable) {
-  return parseFloat(rootVariables.getPropertyValue(variable))
-}
 
-function setCSSPropertiesDefaltValues(varArray) {
+function setCSSPropertiesDefaltValues(cssVariablesArray) {
   const root = document.querySelector(":root")
-  varArray.forEach((variables) => {
-    const variableName = variables[0]
-    const variableValue = variables[1]
+  cssVariablesArray.forEach((variable) => {
+    const variableName = variable[0]
+    const variableValue = variable[1]
     root.style.setProperty(variableName, variableValue)
   })
 }
