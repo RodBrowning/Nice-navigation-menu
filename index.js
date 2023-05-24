@@ -4,8 +4,12 @@ navContainer.childNodes.forEach((item) => {
     const itemIndex = Array.from(navContainer.children).indexOf(
       event.currentTarget
     )
-    const smoothTrasition = true
-    translateSpaceship(itemIndex, smoothTrasition)
+
+    //! OPCIONAL!!
+    //! const smoothTrasition = false
+    //! translateSpaceship(itemIndex, smoothTrasition)
+
+    translateSpaceship(itemIndex)
     activeItemStyle(navContainer, event.currentTarget)
   })
 })
@@ -18,8 +22,8 @@ function activeItemStyle(navContainer, target) {
 
 // Todo -> Atribui os valores que controlam a animação
 setCSSPropertiesDefaltValues([
-  ["--default-translate-duration", "400ms"],
-  ["--animation-duration", "250ms"],
+  ["--default-translate-duration", "250ms"],
+  ["--animation-duration", "125ms"],
 ])
 
 //! Desabilita a funcção enquanto o timeout estiver ativo para não interromper a animação
@@ -27,7 +31,7 @@ let clickDisabled = false
 // Todo -> Usamos para saber quantos itens de distancia deveremos transitar
 let lastIndexClicked = 0
 
-function translateSpaceship(itemIndex, smoothTrasition) {
+function translateSpaceship(itemIndex, smoothTrasition = true) {
   if (clickDisabled) return
   clickDisabled = true
 
@@ -87,10 +91,7 @@ function translateSpaceship(itemIndex, smoothTrasition) {
     spaceshipBox.classList.remove("animate")
   spaceshipBox.classList.add("animate")
 
-  //Todo -> Tempo total da transição
-  const time =
-    (smoothTrasition ? Math.abs(clickedElementIndex - lastIndexClicked) : 1) *
-    defaultLeftTranslateDuration
+  const time = leftTranslateTotalDuration
 
   //Todo -> Remove classe após o fim da transição e reactiva a interação
   setTimeout(() => {
