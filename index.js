@@ -63,7 +63,7 @@ function translateSpaceship(itemIndex, useSmoothTrasition = true) {
         : 1)
   )
 
-  // Todo -> Tempo que leva para a animação que acende a luz da nave se inicia.
+  // Todo -> Tempo que leva para a animação que acende a luz da nave se iniciar.
   const animationDelay = `${Math.abs(
     animationDuration - leftTranslateTotalDuration
   ).toString()}ms`
