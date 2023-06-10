@@ -69,7 +69,7 @@ function translateSpaceship(itemIndex, useSmoothTrasition = true) {
   ).toString()}ms`
 
   // Todo -> Descobrimos a porcentagem que cada item ocupa
-  // Todo -- e muntiplicamos por quandos itens devemos transitar para ter a posição final do item.
+  // Todo -- e multiplicamos por quandos itens devemos transitar para ter a posição final do item.
   const translatePercentage = (100 / numberOfItems) * clickedElementIndex
   root.style.setProperty("--left-translate", `${translatePercentage}%`)
   //* Fim define CSS variable values
@@ -82,7 +82,7 @@ function translateSpaceship(itemIndex, useSmoothTrasition = true) {
   root.style.setProperty("--animation-delay", animationDelay)
   //* Fim set CSS variable values
 
-  //* Handle light animation class
+  //* Handle toggle light animation class
   if (spaceshipBox.classList.contains("animate"))
     spaceshipBox.classList.remove("animate")
 
